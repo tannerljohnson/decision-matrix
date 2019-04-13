@@ -94,7 +94,6 @@ class IndexPage extends React.Component {
     var code = event.keyCode || event.which;
     if(code === 13) { //13 is the enter keycode
         this.handleFactorRowSubmit();
-        document.getElementById("outlined-name").focus();
     }
   }
 
@@ -102,6 +101,7 @@ class IndexPage extends React.Component {
   handleFactorRowSubmit = () => {
     let factor = { id: this.state.i, name: this.state.name, weight: this.state.weight };
     this.addNewFactorRow(factor);
+    document.getElementById("outlined-name").focus();
   }
   addNewFactorRow = factor => {
     this.setState({
@@ -167,7 +167,7 @@ class IndexPage extends React.Component {
 
 
 
-        <h2>Add your option</h2>
+        <h2>Add your options and score them</h2>
         <OptionTable/>
 
       </Layout>

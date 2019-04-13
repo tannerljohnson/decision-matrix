@@ -12,25 +12,20 @@ import TextField from '@material-ui/core/TextField';
 const styles = theme => ({
   root: {
     width: '35%',
+    minWidth: 300,
     marginTop: theme.spacing.unit * 3,
     marginBottom: theme.spacing.unit * 3,
-    // overflowX: 'auto',
+    display: 'flex',
+    flexWrap: 'wrap',
   },
   table: {
     maxWidth: 300,
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing.unit * 2,
   },
+  cell: {
+    fontSize: 20,
+  }
 });
-
-let id = 0;
-function createData(factor, weight) {
-  id += 1;
-  return { id, factor, weight };
-}
-
-const rows = [
-  createData('Salary', 1.0),
-];
 
 class DecisionTable extends React.Component {
 
@@ -60,14 +55,14 @@ class DecisionTable extends React.Component {
       <Paper className={classes.root}>
         <Table className={classes.table}>
           <TableHead>
-            <TableRow>
-              <TableCell>Factor</TableCell>
-              <TableCell align="right">Weight</TableCell>
+            <TableRow >
+              <TableCell className={classes.cell}>Factor</TableCell>
+              <TableCell align="right" className={classes.cell}>Weight</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
           {this.props.factors.map((factor) => (
-            <TableRow key={factor.id}>
+            <TableRow key={factor.id} >
               <TableCell component="th" scope="row">
                 {factor.name}
               </TableCell>
