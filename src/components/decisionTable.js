@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   root: {
@@ -33,6 +34,24 @@ const rows = [
 
 class DecisionTable extends React.Component {
 
+  state = {
+    id: 0,
+    name: '',
+    weight: 0,
+  };
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    })
+    this.updateRow();
+  }
+
+  updateRow = () => {
+    let factor = this.state;
+    this.props.handleFactorUpdate(factor);
+  }
+
   render() {
 
     const { classes } = this.props;
@@ -47,14 +66,16 @@ class DecisionTable extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.id}>
-                <TableCell component="th" scope="row">
-                  {row.factor}
-                </TableCell>
-                <TableCell align="right">{row.weight}</TableCell>
-              </TableRow>
-            ))}
+          {this.props.factors.map((factor) => (
+            <TableRow key={factor.id}>
+              <TableCell component="th" scope="row">
+                {factor.name}
+              </TableCell>
+              <TableCell align="right">
+                {factor.weight}
+              </TableCell>
+            </TableRow>
+          ))}
           </TableBody>
         </Table>
       </Paper>
